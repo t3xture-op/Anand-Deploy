@@ -8,7 +8,7 @@ import {
   TrendingUp,
   Calendar,
 } from "lucide-react";
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 const UserList = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,7 +46,6 @@ const UserList = () => {
         }
       );
       const data = await res.json();
-      console.log(data);
       setOrderDetails(data);
     } catch (error) {
       console.error("Failed to fetch order:", error);

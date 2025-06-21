@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +25,7 @@ const Login = () => {
       [name]: value
     }));
   };
+
 
 
 

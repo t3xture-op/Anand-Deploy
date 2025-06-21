@@ -67,8 +67,10 @@ export async function userLogin(req, res) {
       sameSite: "none",
     };
 
-    res.cookie("accessToken", accessToken, cookiesOption);
-    res.cookie("refreshToken", refreshToken, cookiesOption);
+    const prefix = user.role === "admin" ? "admin" : "user";
+
+    res.cookie(`${prefix}AccessToken`, accessToken, cookiesOption);
+    res.cookie(`${prefix}RefreshToken`, refreshToken, cookiesOption);
 
     return res.json({
       message: "Login successful",
@@ -105,8 +107,8 @@ export async function userLogout(req, res) {
       sameSite: "none",
     };
 
-    res.clearCookie("accessToken", cookiesOption);
-    res.clearCookie("refreshToken", cookiesOption);
+    res.clearCookie(`${prefix}AccessToken`, cookiesOption);
+    res.clearCookie(`${prefix}RefreshToken`, cookiesOption);
 
     // Remove stored refresh token in DB
     await User.findByIdAndUpdate(userId, { refresh_token: "" });

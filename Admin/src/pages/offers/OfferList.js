@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, Filter, Plus, X, Tag, Trash2, Edit } from "lucide-react";
 import { toast } from "sonner";
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 const OfferList = () => {
   const [offers, setOffers] = useState([]);

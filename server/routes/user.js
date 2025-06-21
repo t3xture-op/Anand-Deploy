@@ -9,7 +9,7 @@ const upload = multer({ dest: "uploads/" });
 
 userRouter.post('/register',userRegistration)
 userRouter.post('/login',userLogin)
-userRouter.get('/am', getCurrentUser);
+userRouter.get('/am',auth, getCurrentUser);
 userRouter.post('/forgot-password',forgotPassword)
 userRouter.post('/reset-password',resetPassword)
 userRouter.post('/verify-otp',verifyOtp)

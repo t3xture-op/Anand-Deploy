@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import DashboardChart from "../components/dashboard/DashboardChart";
 import { toast } from "sonner";
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 export default function Reports() {
   const [dashboardStats, setDashboardStats] = useState(null);

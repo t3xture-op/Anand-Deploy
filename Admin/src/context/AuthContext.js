@@ -1,6 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
-
+import React, { createContext, useState, useEffect } from "react";
+    const API_BASE = process.env.REACT_APP_API_BASE_URL;
 export const AuthContext = createContext();
+
+
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -9,19 +11,24 @@ export const AuthProvider = ({ children }) => {
 
   // Securely fetch only admin session from backend
   const fetchAdminUser = async () => {
-     const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+
+    if (!API_BASE) {
+      console.error("Missing VITE_API_BASE_URL in environment variables!");
+    }
+
     try {
       const res = await fetch(`${API_BASE}/api/user/am`, {
-        method: 'GET',
-        credentials: 'include', // Send cookies (adminAccessToken)
+        method: "GET",
+        credentials: "include", // Send cookies (adminAccessToken)
       });
 
-      if (!res.ok) throw new Error('Not authenticated');
+      if (!res.ok) throw new Error("Not authenticated");
 
       const data = await res.json();
 
-      if (!data?.user || data.user.role !== 'admin') {
-        throw new Error('Unauthorized access');
+      if (!data?.user || data.user.role !== "admin") {
+        throw new Error("Unauthorized access");
       }
 
       setUser(data.user);
@@ -39,12 +46,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
-    if (userData?.role === 'admin') {
+    if (userData?.role === "admin") {
       setUser(userData);
       setIsAuthenticated(true);
     } else {
       // Prevent accidental login as non-admin
-      console.warn('Tried to log in non-admin to admin panel');
+      console.warn("Tried to log in non-admin to admin panel");
     }
   };
 

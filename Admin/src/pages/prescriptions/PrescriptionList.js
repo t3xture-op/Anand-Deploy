@@ -11,7 +11,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { toast } from "sonner";
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 const PrescriptionList = () => {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -25,7 +25,7 @@ const PrescriptionList = () => {
       try {
         const res = await fetch(`${API_BASE}/api/prescription/all`, {
           method: "GET",
-          credentials: "include",
+          credentials:"include",
         });
 
         if (!res.ok) {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Trash2, PlusCircle } from "lucide-react";
 import { toast } from "sonner";
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 const BannerList = () => {
   const [banners, setBanners] = useState([]);
