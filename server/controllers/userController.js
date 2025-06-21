@@ -64,7 +64,7 @@ export async function userLogin(req, res) {
     const cookiesOption = {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "none",
     };
 
     res.cookie("accessToken", accessToken, cookiesOption);
@@ -102,7 +102,7 @@ export async function userLogout(req, res) {
     const cookiesOption = {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "none",
     };
 
     res.clearCookie("accessToken", cookiesOption);
