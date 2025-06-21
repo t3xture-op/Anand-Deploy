@@ -72,14 +72,14 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/payment", paymentRoutes);
 
 // Serve static files in production
-if (process.env.NODE_ENV === "production") {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  app.use(express.static(join(__dirname, "../dist")));
+// if (process.env.NODE_ENV === "production") {
+//   const __dirname = dirname(fileURLToPath(import.meta.url));
+//   app.use(express.static(join(__dirname, "../dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(join(__dirname, "../dist/index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     res.sendFile(join(__dirname, "../dist/index.html"));
+//   });
+// }
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
