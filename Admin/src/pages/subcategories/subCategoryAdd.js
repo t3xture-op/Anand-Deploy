@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Save, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const SubCategoryAdd = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SubCategoryAdd = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/subcategory/add",
+        `${API_BASE}/api/subcategory/add`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -4,6 +4,7 @@ import { useCartStore } from "../store/cartStore";
 import { AuthContext } from "../authContext";
 import SearchBar from "../components/SearchBar";
 import { toast } from "sonner";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -14,7 +15,7 @@ export default function Products() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch(`${API_BASE}/api/products`);
       const data = await res.json();
       setProducts(data);
     };
@@ -50,7 +51,7 @@ export default function Products() {
     });
 
     try {
-      const res = await fetch("http://localhost:5000/api/cart/add", {
+      const res = await fetch(`${API_BASE}/api/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

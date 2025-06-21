@@ -10,6 +10,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { toast } from "sonner";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function PrescriptionDetail() {
   const { id } = useParams();
@@ -25,7 +26,7 @@ export default function PrescriptionDetail() {
     const fetchPrescription = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/prescription/${id}`,
+          `${API_BASE}/api/prescription/${id}`,
           {
             method: "GET",
             credentials: "include",
@@ -54,7 +55,7 @@ export default function PrescriptionDetail() {
     setIsSubmitting(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/prescription/review/${id}`,
+        `${API_BASE}/api/prescription/review/${id}`,
         {
           method: "PUT",
           headers: {

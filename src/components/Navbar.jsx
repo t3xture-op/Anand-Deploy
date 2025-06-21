@@ -6,6 +6,7 @@ import { AuthContext } from "../authContext";
 import SearchBar from "./SearchBar";
 import userPlaceholder from "../public/userPlaceholder.png";
 import anandmedicals from '../public/anandmedicals.png'
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,7 +33,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/user/logout", {
+      await fetch(`${API_BASE}/api/user/logout`, {
         method: "POST",
         credentials: "include",
       });
@@ -50,7 +51,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/user/am", {
+        const res = await fetch(`${API_BASE}/api/user/am`, {
           credentials: "include",
         });
         const data = await res.json();

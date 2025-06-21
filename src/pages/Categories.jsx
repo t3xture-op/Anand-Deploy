@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -10,7 +11,7 @@ export default function Categories() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/category");
+        const res = await fetch(`${API_BASE}/api/category`);
         if (!res.ok) throw new Error("Failed to fetch categories");
         const data = await res.json();
         setCategories(data);

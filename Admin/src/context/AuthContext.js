@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   // Securely fetch only admin session from backend
   const fetchAdminUser = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/user/am', {
+      const res = await fetch(`${API_BASE}/api/user/am`, {
         method: 'GET',
         credentials: 'include', // Send cookies (adminAccessToken)
       });

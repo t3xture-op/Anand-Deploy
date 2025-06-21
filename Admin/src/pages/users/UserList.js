@@ -8,6 +8,7 @@ import {
   TrendingUp,
   Calendar,
 } from "lucide-react";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const UserList = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,7 +23,7 @@ const UserList = () => {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch("http://localhost:5000/api/user/get"); // Update with your backend base path if needed
+        const response = await fetch(`${API_BASE}/api/user/get`); // Update with your backend base path if needed
         const data = await response.json();
         setUsers(data);
         setLoading(false);
@@ -39,7 +40,7 @@ const UserList = () => {
   async function fetchOrder() {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/orders/admin/user-order-stats",
+        `${API_BASE}/api/orders/admin/user-order-stats`,
         {
           credentials: "include",
         }

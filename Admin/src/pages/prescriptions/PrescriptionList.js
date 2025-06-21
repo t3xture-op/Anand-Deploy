@@ -11,6 +11,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { toast } from "sonner";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const PrescriptionList = () => {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -22,7 +23,7 @@ const PrescriptionList = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/prescription/all", {
+        const res = await fetch(`${API_BASE}/api/prescription/all`, {
           method: "GET",
           credentials: "include",
         });
@@ -106,7 +107,7 @@ const PrescriptionList = () => {
         onClick: async () => {
           try {
             const res = await fetch(
-              `http://localhost:5000/api/prescription/${id}`,
+              `${API_BASE}/api/prescription/${id}`,
               {
                 method: "DELETE",
                 credentials: "include",

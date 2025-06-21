@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ApprovedFeedbacksDisplay from "../components/ApprovedFeedbacksDisplay";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/products");
+        const res = await fetch(`${API_BASE}/api/products`);
         const data = await res.json();
         const shuffled = data.sort(() => 0.5 - Math.random());
         setProducts(shuffled.slice(0, 8));
@@ -26,7 +27,7 @@ export default function Home() {
 
     const fetchOffers = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/offer/active");
+        const res = await fetch(`${API_BASE}/api/offer/active`);
         const data = await res.json();
         setOffers(data);
       } catch (err) {
@@ -36,7 +37,7 @@ export default function Home() {
 
     const fetchSubCategories = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/subcategory");
+        const res = await fetch(`${API_BASE}/api/subcategory`);
         const data = await res.json();
         setSubCategories(data);
       } catch (err) {
@@ -46,7 +47,7 @@ export default function Home() {
 
     const fetchBanners = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/banner");
+        const res = await fetch(`${API_BASE}/api/banner`);
         const data = await res.json();
         setBanners(data);
       } catch (err) {

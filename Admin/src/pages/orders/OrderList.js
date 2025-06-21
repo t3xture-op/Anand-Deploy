@@ -8,6 +8,7 @@ import {
   X,
   ExternalLink,
 } from "lucide-react";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -36,7 +37,7 @@ const OrderList = () => {
             .find((row) => row.startsWith("accessToken="))
             ?.split("=")[1];
 
-        const response = await fetch("http://localhost:5000/api/orders", {
+        const response = await fetch(`${API_BASE}/api/orders`, {
           headers: {
             "Content-Type": "application/json",
           },

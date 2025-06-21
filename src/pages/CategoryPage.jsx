@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { useCartStore } from "../store/cartStore";
 import { AuthContext } from "../authContext";
 import { toast } from "sonner";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export default function CategoryPage() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export default function CategoryPage() {
   useEffect(() => {
     const fetchCategoryProducts = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/category/${id}`);
+        const res = await fetch(`${API_BASE}/api/products/category/${id}`);
         const data = await res.json();
         setProducts(data);
       } catch (err) {
@@ -50,7 +51,7 @@ export default function CategoryPage() {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/cart/add', {
+      const response = await fetch(`${API_BASE}/api/cart/add`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

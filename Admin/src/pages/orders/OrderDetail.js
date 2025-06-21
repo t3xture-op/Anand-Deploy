@@ -14,6 +14,8 @@ import {
   XCircle,
 } from "lucide-react";
 import { toast } from "sonner";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 const OrderDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const OrderDetail = () => {
         setIsLoading(true);
 
         const orderResponse = await fetch(
-          `http://localhost:5000/api/orders/${id}`,
+          `${API_BASE}/api/orders/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -51,7 +53,7 @@ const OrderDetail = () => {
         // If order has prescription, fetch prescription details
         if (fetchedOrder.prescriptionId) {
           const prescriptionResponse = await fetch(
-            `http://localhost:5000/api/prescriptions/${fetchedOrder.prescriptionId}`,
+            `${API_BASE}/api/prescriptions/${fetchedOrder.prescriptionId}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -85,7 +87,7 @@ const OrderDetail = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/${id}/status`,
+        `${API_BASE}/api/orders/${id}/status`,
         {
           method: "PATCH",
           headers: {

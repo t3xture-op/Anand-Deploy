@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ const Login = () => {
   e.preventDefault();
   try {
     setIsLoading(true);
-    const response = await fetch('http://localhost:5000/api/user/login', {
+    const response = await fetch(`${API_BASE}/api/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
