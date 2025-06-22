@@ -25,5 +25,15 @@ userRouter.put('/change-password', auth, changePassword);
 userRouter.get("/me",auth,getMyProfile)
 
 
+//admin routes
+userRouter.get("/admin/me",auth,getMyProfile)
+userRouter.get('/admin/am',auth, getCurrentUser);
+userRouter.post('/admin/login',userLogin)
+userRouter.put('/admin/update-profile', auth, updateProfile);
+userRouter.post('/admin/upload-profile-photo',auth, uploadUser.single('image'), uploadProfilePhoto);
+userRouter.delete('/admin/delete-profile-photo', auth, deleteProfilePhoto);
+userRouter.put('/admin/change-password', auth, changePassword);
+userRouter.get('/admin/logout',auth,userLogout)
+
 
 export default userRouter;

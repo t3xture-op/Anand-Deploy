@@ -31,7 +31,7 @@ export default function Reports() {
     try {
       setLoading(true);
       const res = await fetch(
-        `${API_BASE}/api/reports/stats?from=${dateRange.from}&to=${dateRange.to}`,
+        `${API_BASE}/api/reports/admin/stats?from=${dateRange.from}&to=${dateRange.to}`,
         { credentials: "include" }
       );
       setDashboardStats(await res.json());
@@ -46,11 +46,11 @@ export default function Reports() {
     try {
       const url =
         reportType === "sales"
-          ? `${API_BASE}/api/reports/sales-details?from=${dateRange.from}&to=${dateRange.to}`
+          ? `${API_BASE}/api/reports/admin/sales-details?from=${dateRange.from}&to=${dateRange.to}`
           : reportType === "orders"
-          ? `${API_BASE}/api/reports/orders-report?from=${dateRange.from}&to=${dateRange.to}`
+          ? `${API_BASE}/api/reports/admin/orders-report?from=${dateRange.from}&to=${dateRange.to}`
           : reportType === "products"
-          ? `${API_BASE}/api/reports/products-report?from=${dateRange.from}&to=${dateRange.to}`
+          ? `${API_BASE}/api/reports/admin/products-report?from=${dateRange.from}&to=${dateRange.to}`
           : null;
       if (!url) return setDetailsData([]);
       const res = await fetch(url, { credentials: "include" });
@@ -62,7 +62,7 @@ export default function Reports() {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = `${API_BASE}/api/reports/download?type=${reportType}`;
+    link.href = `${API_BASE}/api/reports/admin/download?type=${reportType}`;
     link.download = `${reportType}-report.pdf`;
     document.body.appendChild(link);
     link.click();

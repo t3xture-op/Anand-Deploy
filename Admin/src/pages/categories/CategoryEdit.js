@@ -82,7 +82,7 @@ const CategoryEdit = () => {
       }
 
       const response = await fetch(
-        `${API_BASE}/api/category/edit/${id}`,
+        `${API_BASE}/api/category/admin/edit/${id}`,
         {
           method: "PUT",
           body: submitData,
@@ -109,7 +109,7 @@ const CategoryEdit = () => {
         onClick: async () => {
           try {
             const res = await fetch(
-              `${API_BASE}/api/category/delete/${id}`,
+              `${API_BASE}/api/category/admin/delete/${id}`,
               {
                 method: "DELETE",
                 credentials:"include",

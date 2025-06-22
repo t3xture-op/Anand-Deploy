@@ -22,7 +22,7 @@ const BannerList = () => {
         label: "DELETE",
         onClick: async () => {
           try {
-            const res = await fetch(`${API_BASE}/api/banner/${id}`, {
+            const res = await fetch(`${API_BASE}/api/banner/admin/${id}`, {
               method: "DELETE",
               credentials:"include",
             });

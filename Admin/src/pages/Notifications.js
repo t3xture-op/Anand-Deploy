@@ -23,7 +23,7 @@ const Notifications = () => {
 
   const fetchNotifications = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/notifications`);
+      const res = await fetch(`${API_BASE}/api/admin/notifications`);
       const data = await res.json();
       setNotifications(data);
     } catch (err) {
@@ -62,7 +62,7 @@ const Notifications = () => {
   };
 
   const markAllAsRead = async () => {
-    await fetch(`${API_BASE}/api/notifications/read-all`, {
+    await fetch(`${API_BASE}/api/admin/notifications/read-all`, {
       method: "PATCH",
       credentials:"include",
     });
@@ -70,7 +70,7 @@ const Notifications = () => {
   };
 
   const markAsRead = async (_id) => {
-    await fetch(`${API_BASE}/api/notifications/read/${_id}`, {
+    await fetch(`${API_BASE}/api/admin/notifications/read/${_id}`, {
       method: "PATCH",
       credentials:"include",
     });
@@ -79,7 +79,7 @@ const Notifications = () => {
 
   const clearAll = async () => {
     if (window.confirm("Are you sure you want to clear all notifications?")) {
-      await fetch(`${API_BASE}/api/notifications/clear-all`, {
+      await fetch(`${API_BASE}/api/admin/notifications/clear-all`, {
         method: "DELETE",
         credentials:"include",
       });

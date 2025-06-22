@@ -28,7 +28,7 @@ const SubCategoryAdd = () => {
 
     try {
       const response = await fetch(
-        `${API_BASE}/api/subcategory/add`,
+        `${API_BASE}/api/subcategory/admin/add`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

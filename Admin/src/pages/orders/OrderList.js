@@ -37,7 +37,7 @@ const OrderList = () => {
             .find((row) => row.startsWith("accessToken="))
             ?.split("=")[1];
 
-        const response = await fetch(`${API_BASE}/api/orders`, {
+        const response = await fetch(`${API_BASE}/api/orders/admin`, {
           headers: {
             "Content-Type": "application/json",
           },

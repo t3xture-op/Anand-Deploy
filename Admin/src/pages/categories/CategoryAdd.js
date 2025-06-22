@@ -48,7 +48,7 @@ const CategoryAdd = () => {
       form.append("isActive", formData.isActive);
       if (file) form.append("image", file);
 
-      const response = await fetch(`${API_BASE}/api/category/add`, {
+      const response = await fetch(`${API_BASE}/api/category/admin/add`, {
         method: "POST",
         body: form,
         credentials: "include",

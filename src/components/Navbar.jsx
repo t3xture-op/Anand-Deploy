@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, User, FileUp, Package } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
-import { AuthContext } from "../authContext";
+import { AuthContext }  from "../authContext";
 import SearchBar from "./SearchBar";
 import userPlaceholder from "../public/userPlaceholder.png";
 import anandmedicals from '../public/anandmedicals.png'

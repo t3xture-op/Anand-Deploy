@@ -53,7 +53,7 @@ const SubCategoryList = () => {
         label: "DELETE",
         onClick: async () => {
           try {
-            await fetch(`${API_BASE}/api/subcategory/delete/${id}`, {
+            await fetch(`${API_BASE}/api/subcategory/admin/delete/${id}`, {
               method: "DELETE",
               credentials:"include",
             });

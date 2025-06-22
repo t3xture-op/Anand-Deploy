@@ -26,7 +26,7 @@ export default function PrescriptionDetail() {
     const fetchPrescription = async () => {
       try {
         const res = await fetch(
-          `${API_BASE}/api/prescription/${id}`,
+          `${API_BASE}/api/prescription/admin/${id}`,
           {
             method: "GET",
             credentials: "include",
@@ -55,7 +55,7 @@ export default function PrescriptionDetail() {
     setIsSubmitting(true);
     try {
       const res = await fetch(
-        `${API_BASE}/api/prescription/review/${id}`,
+        `${API_BASE}/api/prescription/admin/review/${id}`,
         {
           method: "PUT",
           headers: {

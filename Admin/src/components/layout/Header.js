@@ -26,7 +26,7 @@ const Header = ({ title, toggleSidebar }) => {
 
   // Notifications: SSE
   useEffect(() => {
-    const evtSource = new EventSource(`${API_BASE}/api/notifications/stream`);
+    const evtSource = new EventSource(`${API_BASE}/api/admin/notifications/stream`);
 
     evtSource.onmessage = (e) => {
       try {
@@ -100,7 +100,7 @@ const Header = ({ title, toggleSidebar }) => {
 
   const markAsRead = (id) => {
     if (!id) return;
-    fetch(`${API_BASE}/api/notifications/read/${id}`, {
+    fetch(`${API_BASE}/api/admin/notifications/read/${id}`, {
       method: "PATCH",
       credentials:"include",
     });
@@ -110,7 +110,7 @@ const Header = ({ title, toggleSidebar }) => {
   };
 
   const handleLogout = async () => {
-    await fetch(`${API_BASE}/api/user/logout`, {
+    await fetch(`${API_BASE}/api/user/admin/logout`, {
       method: "POST",
       credentials: "include",
     });

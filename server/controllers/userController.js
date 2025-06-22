@@ -106,9 +106,10 @@ export async function userLogout(req, res) {
       secure: true,
       sameSite: "none",
     };
+    const Prefix = user.role === "admin" ? "admin" : "user";
 
-    res.clearCookie(`${prefix}AccessToken`, cookiesOption);
-    res.clearCookie(`${prefix}RefreshToken`, cookiesOption);
+    res.clearCookie(`${Prefix}AccessToken`, cookiesOption);
+    res.clearCookie(`${Prefix}RefreshToken`, cookiesOption);
 
     // Remove stored refresh token in DB
     await User.findByIdAndUpdate(userId, { refresh_token: "" });
@@ -124,7 +125,13 @@ export async function userLogout(req, res) {
 //get current user
 export const getCurrentUser = async (req, res) => {
   try {
-    const token = req.cookies.accessToken;
+    // Use the correct cookie name
+    const isAdminRoute = req.originalUrl.includes("/admin");
+    const accessTokenName = isAdminRoute
+      ? "adminAccessToken"
+      : "userAccessToken";
+    const token = req.cookies[accessTokenName];
+
     if (!token) {
       return res.status(401).json({ message: "No access token found" });
     }

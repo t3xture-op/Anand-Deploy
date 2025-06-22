@@ -26,7 +26,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/reports/stats`, {
+        const res = await fetch(`${API_BASE}/api/reports/admin/stats`, {
           credentials: 'include',
         });
         const data = await res.json();
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
     const fetchNotifications = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/notifications`, {
+        const res = await fetch(`${API_BASE}/api/admin/notifications`, {
           credentials: 'include',
         });
         const data = await res.json();

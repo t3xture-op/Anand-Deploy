@@ -117,7 +117,7 @@ const ProductEdit = () => {
         form.append("image", selectedFile);
       }
 
-      const res = await fetch(`${API_BASE}/api/products/edit/${id}`, {
+      const res = await fetch(`${API_BASE}/api/products/admin/edit/${id}`, {
         method: "PUT",
         credentials:"include",
         body: form,
@@ -142,7 +142,7 @@ const ProductEdit = () => {
         onClick: async () => {
           try {
             const res = await fetch(
-              `${API_BASE}/api/products/delete/${id}`,
+              `${API_BASE}/api/products/admin/delete/${id}`,
               {
                 method: "DELETE",
                 credentials:"include",

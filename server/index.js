@@ -19,6 +19,7 @@ import bannerRoutes from "./routes/banner.js";
 import subCategoryRoutes from "./routes/subCategory.js";
 import feedbackRoutes from "./routes/feedback.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import authRoutes from './routes/auth.js'
 
 dotenv.config();
 
@@ -59,6 +60,7 @@ mongoose
   .catch((error) => console.error("MongoDB connection error:", error));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
@@ -68,7 +70,7 @@ app.use("/api/address", addressRoutes);
 app.use("/api/offer", offerRoutes);
 app.use("/api/prescription", prescriptionRoutes);
 app.use("/api/reports", reportRoutes);
-app.use("/api/notifications", notificationRoutes);
+app.use("/api/admin/notifications", notificationRoutes);
 app.use("/api/banner", bannerRoutes);
 app.use("/api/subcategory", subCategoryRoutes);
 app.use("/api/feedback", feedbackRoutes);

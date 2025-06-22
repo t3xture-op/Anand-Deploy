@@ -29,7 +29,7 @@ function OfferEdit() {
 
   // Fetch offer data
   useEffect(() => {
-    fetch(`${API_BASE}/api/offer/${id}`)
+    fetch(`${API_BASE}/api/offer/admin/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setOfferName(data.offerName);
@@ -87,7 +87,7 @@ function OfferEdit() {
     setIsSubmitting(true);
     try {
       const response = await fetch(
-        `${API_BASE}/api/offer/edit/${id}`,
+        `${API_BASE}/api/offer/admin/edit/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

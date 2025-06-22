@@ -7,8 +7,8 @@ dotenv.config();
 
 const auth = async (req, res, next) => {
   try {
-    // Detect role from route path (e.g. /api/user/am is admin)
-    const isAdminRoute = req.originalUrl.includes('/am') || req.originalUrl.includes('/admin');
+  
+    const isAdminRoute =  req.originalUrl.includes('/admin');
     const accessCookieName = isAdminRoute ? 'adminAccessToken' : 'userAccessToken';
     const refreshCookieName = isAdminRoute ? 'adminRefreshToken' : 'userRefreshToken';
 

@@ -54,7 +54,7 @@ const OfferList = () => {
         label: "DELETE",
         onClick: async () => {
           try {
-            const res = await fetch(`${API_BASE}/api/offer/${id}`, {
+            const res = await fetch(`${API_BASE}/api/offer/admin/${id}`, {
               method: "DELETE",
               credentials:"include",
             });

@@ -55,7 +55,7 @@ export default function MyAccount() {
 
   const fetchUserData = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/user/me`, {
+      const res = await fetch(`${API_BASE}/api/user/admin/me`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -95,7 +95,7 @@ export default function MyAccount() {
 
   const handleSave = async () => {
     try {
-      await fetch(`${API_BASE}/api/user/update-profile`, {
+      await fetch(`${API_BASE}/api/user/admin/update-profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -139,7 +139,7 @@ export default function MyAccount() {
     formData.append("image", selectedImage);
     try {
       const res = await fetch(
-        `${API_BASE}/api/user/upload-profile-photo`,
+        `${API_BASE}/api/user/admin/upload-profile-photo`,
         {
           method: "POST",
           body: formData,
@@ -164,7 +164,7 @@ export default function MyAccount() {
   const handleDeletePhoto = async () => {
     try {
       const res = await fetch(
-        `${API_BASE}/api/user/delete-profile-photo`,
+        `${API_BASE}/api/user/admin/delete-profile-photo`,
         {
           method: "DELETE",
           credentials: "include",
@@ -199,7 +199,7 @@ export default function MyAccount() {
 
     try {
       const res = await fetch(
-        `${API_BASE}/api/user/change-password`,
+        `${API_BASE}/api/user/admin/change-password`,
         {
           method: "PUT",
           headers: {

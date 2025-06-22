@@ -33,7 +33,7 @@ const Login = () => {
   e.preventDefault();
   try {
     setIsLoading(true);
-    const response = await fetch(`${API_BASE}/api/user/login`, {
+    const response = await fetch(`${API_BASE}/api/user/admin/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

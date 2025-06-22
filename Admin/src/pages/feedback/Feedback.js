@@ -31,7 +31,7 @@ const Feedback = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE}/api/feedback`, {
+      const response = await fetch(`${API_BASE}/api/feedback/admin`, {
         credentials: "include",
       });
 
@@ -58,7 +58,7 @@ const Feedback = () => {
 
   const handleStatusUpdate = async (id, status) => {
     try {
-      const response = await fetch(`${API_BASE}/api/feedback/${id}`, {
+      const response = await fetch(`${API_BASE}/api/feedback/admin/${id}`, {
         method: "PATCH",
         credentials: "include",
         headers: {
@@ -94,7 +94,7 @@ const Feedback = () => {
         label: "DELETE",
         onClick: async () => {
           try {
-            const promise = fetch(`${API_BASE}/api/feedback/${id}`, {
+            const promise = fetch(`${API_BASE}/api/feedback/admin/${id}`, {
               method: "DELETE",
               credentials: "include",
             });

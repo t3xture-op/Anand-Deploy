@@ -37,7 +37,7 @@ const BannerAdd = () => {
     if (description) formData.append("description", description);
 
     try {
-      const res = await fetch(`${API_BASE}/api/banner/add`, {
+      const res = await fetch(`${API_BASE}/api/banner/admin/add`, {
         method: "POST",
         credentials:"include",
         body: formData,

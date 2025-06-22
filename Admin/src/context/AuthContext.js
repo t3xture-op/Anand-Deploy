@@ -14,13 +14,13 @@ export const AuthProvider = ({ children }) => {
 
 
     if (!API_BASE) {
-      console.error("Missing VITE_API_BASE_URL in environment variables!");
+      console.error("Missing REACT_APP_API_BASE_URL in environment variables!");
     }
 
     try {
-      const res = await fetch(`${API_BASE}/api/user/am`, {
+      const res = await fetch(`${API_BASE}/api/user/admin/am`, {
         method: "GET",
-        credentials: "include", // Send cookies (adminAccessToken)
+        credentials: "include", 
       });
 
       if (!res.ok) throw new Error("Not authenticated");

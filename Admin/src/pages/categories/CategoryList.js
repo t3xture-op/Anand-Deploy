@@ -56,7 +56,7 @@ const CategoryList = () => {
           onClick: async () => {
             try {
               const response = await fetch(
-                `${API_BASE}/api/category/delete/${id}`,
+                `${API_BASE}/api/category/admin/delete/${id}`,
                 {
                   method: "DELETE",
                   credentials:"include"

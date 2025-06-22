@@ -57,7 +57,7 @@ const ProductList = () => {
         onClick: async () => {
           try {
             const res = await fetch(
-              `${API_BASE}/api/products/delete/${id}`,
+              `${API_BASE}/api/products/admin/delete/${id}`,
               {
                 method: "DELETE",
                 credentials:"include",

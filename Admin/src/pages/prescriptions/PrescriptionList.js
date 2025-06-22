@@ -23,7 +23,7 @@ const PrescriptionList = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/prescription/all`, {
+        const res = await fetch(`${API_BASE}/api/prescription/admin/all`, {
           method: "GET",
           credentials:"include",
         });
@@ -107,7 +107,7 @@ const PrescriptionList = () => {
         onClick: async () => {
           try {
             const res = await fetch(
-              `${API_BASE}/api/prescription/${id}`,
+              `${API_BASE}/api/prescription/admin/${id}`,
               {
                 method: "DELETE",
                 credentials: "include",

@@ -33,7 +33,7 @@ const OrderDetail = () => {
         setIsLoading(true);
 
         const orderResponse = await fetch(
-          `${API_BASE}/api/orders/${id}`,
+          `${API_BASE}/api/orders/admin/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const OrderDetail = () => {
         // If order has prescription, fetch prescription details
         if (fetchedOrder.prescriptionId) {
           const prescriptionResponse = await fetch(
-            `${API_BASE}/api/prescriptions/${fetchedOrder.prescriptionId}`,
+            `${API_BASE}/api/prescriptions/admin/${fetchedOrder.prescriptionId}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const OrderDetail = () => {
 
     try {
       const response = await fetch(
-        `${API_BASE}/api/orders/${id}/status`,
+        `${API_BASE}/api/orders/admin/${id}/status`,
         {
           method: "PATCH",
           headers: {

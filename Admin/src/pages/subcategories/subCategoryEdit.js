@@ -55,7 +55,7 @@ const SubCategoryEdit = () => {
 
     try {
       const res = await fetch(
-        `${API_BASE}/api/subcategory/edit/${id}`,
+        `${API_BASE}/api/subcategory/admin/edit/${id}`,
         {
           method: "PUT",
           headers: {
