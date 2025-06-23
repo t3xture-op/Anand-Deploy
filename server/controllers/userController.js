@@ -99,17 +99,17 @@ export async function userLogout(req, res) {
     const userId = req.user._id;
 
     const user = await User.findById(userId).select("role");
-    const prefix = user?.role === "admin" ? "admin" : "user";
 
     const cookiesOption = {
       httpOnly: true,
       secure: true,
       sameSite: "none",
     };
-    const Prefix = user.role === "admin" ? "admin" : "user";
 
-    res.clearCookie(`${Prefix}AccessToken`, cookiesOption);
-    res.clearCookie(`${Prefix}RefreshToken`, cookiesOption);
+    const prefix = user?.role === "admin" ? "admin" : "user";
+
+    res.clearCookie(`${prefix}AccessToken`, cookiesOption);
+    res.clearCookie(`${prefix}RefreshToken`, cookiesOption);
 
     // Remove stored refresh token in DB
     await User.findByIdAndUpdate(userId, { refresh_token: "" });
@@ -321,8 +321,9 @@ export async function getUserId(req, res) {
     const deliveredOrders = orders.filter(
       (o) => o.status === "delivered"
     ).length;
+
     const totalSpent = orders
-      .filter((o) => o.paymentStatus === "completed")
+      .filter((o) => ["completed", "paid", "success"].includes(o.paymentStatus))
       .reduce((sum, o) => sum + (o.totalAmount || 0), 0);
 
     res.json({
@@ -341,6 +342,7 @@ export async function getUserId(req, res) {
     res.status(500).json({ message: "Error fetching user details" });
   }
 }
+
 
 //update profile
 export const updateProfile = async (req, res) => {

@@ -53,37 +53,47 @@ const UserList = () => {
     }
   }
 
-  // Filter users based on search term
-  const filteredUsers = users.filter((user) => {
-    return (
-      user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.phone?.includes(searchTerm)
-    );
-  });
+  // Merge users with their order stats
+const enrichedUsers = users.map((user) => {
+  const stats = orderdetails.find((o) => o.userId === user._id) || {
+    totalOrders: 0,
+    totalSpent: 0,
+  };
+  return { ...user, ...stats };
+});
 
-  // Sort users
-  const sortedUsers = [...filteredUsers].sort((a, b) => {
-    let comparison = 0;
+// Filter users based on search term
+const filteredUsers = enrichedUsers.filter((user) => {
+  return (
+    user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.phone?.includes(searchTerm)
+  );
+});
 
-    switch (sortBy) {
-      case "name":
-        comparison = a.name.localeCompare(b.name);
-        break;
-      case "totalOrders":
-        comparison = a.totalOrders - b.totalOrders;
-        break;
-      case "totalSpent":
-        comparison = a.totalSpent - b.totalSpent;
-        break;
-      case "createdAt":
-      default:
-        comparison = new Date(a.createdAt) - new Date(b.createdAt);
-        break;
-    }
+// Sort users
+const sortedUsers = [...filteredUsers].sort((a, b) => {
+  let comparison = 0;
 
-    return sortOrder === "asc" ? comparison : -comparison;
-  });
+  switch (sortBy) {
+    case "name":
+      comparison = a.name.localeCompare(b.name);
+      break;
+    case "totalOrders":
+      comparison = a.totalOrders - b.totalOrders;
+      break;
+    case "totalSpent":
+      comparison = a.totalSpent - b.totalSpent;
+      break;
+    case "createdAt":
+    default:
+      comparison = new Date(a.createdAt) - new Date(b.createdAt);
+      break;
+  }
+
+  return sortOrder === "asc" ? comparison : -comparison;
+});
+
 
   // Format date for display
   const formatDate = (dateString) => {

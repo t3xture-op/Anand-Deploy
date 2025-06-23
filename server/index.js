@@ -26,32 +26,34 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(cookieParser());
-
+app.use(express.json()); 
 
 
 
 // Middleware
 
 const allowedOrigins = [
-  "http://localhost:5173", 
-  "http://localhost:3000", 
-  "https://anand-admin.vercel.app", 
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://anand-admin.vercel.app",
   "https://anand-deploy.vercel.app",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.warn(`❌ CORS rejected from: ${origin}`);
         callback(new Error("CORS not allowed"));
       }
     },
     credentials: true,
   })
 );
-app.use(express.json());
+
 
 // MongoDB Connection
 mongoose

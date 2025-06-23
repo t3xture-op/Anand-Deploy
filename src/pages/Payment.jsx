@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
 import { CreditCard, Truck } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
 import { toast } from "sonner";
@@ -19,27 +19,32 @@ export default function Payment() {
     return sum + discountedPrice * item.quantity;
   }, 0);
 
-  const shipping = subtotal > 500 ? 0 : 50;
+  const shipping = subtotal > 500 ? 0 : 20;
   const total = subtotal + shipping;
   const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+  const location = useLocation();
 
-  useEffect(() => {
-    const selectedAddressId = localStorage.getItem("selectedAddressId");
-    if (selectedAddressId) {
-      setShippingAddress(selectedAddressId);
-    } else {
-      fetch(`${API_BASE}/api/address/default`, {
-        credentials: "include",
+  
+useEffect(() => {
+  
+  const addressIdFromState = location.state?.addressId;
+
+  if (addressIdFromState) {
+    setShippingAddress(addressIdFromState);
+  } else {
+    // fallback to default address
+    fetch(`${API_BASE}/api/address/default`, {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.address?._id) {
+          setShippingAddress(data.address._id);
+        }
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data?.address?._id) {
-            setShippingAddress(data.address._id);
-          }
-        })
-        .catch((err) => console.error("Error fetching default address:", err));
-    }
-  }, []);
+      .catch((err) => console.error("Error fetching default address:", err));
+  }
+}, []);
 
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {

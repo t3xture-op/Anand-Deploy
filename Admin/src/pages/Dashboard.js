@@ -60,7 +60,7 @@ const Dashboard = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-10 text-gray-500 dark:text-gray-400  dark:bg-[#0d1117] dark:text-white transition-colors">Loading dashboard...</div>;
+    return <div className="text-center py-10 text-gray-500   dark:bg-[#0d1117] dark:text-white transition-colors">Loading dashboard...</div>;
   }
 
   if (!stats) {

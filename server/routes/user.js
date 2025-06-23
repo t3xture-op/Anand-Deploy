@@ -15,7 +15,7 @@ userRouter.post('/reset-password',resetPassword)
 userRouter.post('/verify-otp',verifyOtp)
 userRouter.post('/verify-account',verifyAccount)
 userRouter.post('/verify-account-otp',verifyAccountOtp)
-userRouter.get('/logout',auth,userLogout)
+userRouter.post('/logout',auth,userLogout)
 userRouter.get('/get',getAllUsers)
 userRouter.get('/get/:id',getUserId)
 userRouter.put('/update-profile', auth, updateProfile);
@@ -33,7 +33,7 @@ userRouter.put('/admin/update-profile', auth, updateProfile);
 userRouter.post('/admin/upload-profile-photo',auth, uploadUser.single('image'), uploadProfilePhoto);
 userRouter.delete('/admin/delete-profile-photo', auth, deleteProfilePhoto);
 userRouter.put('/admin/change-password', auth, changePassword);
-userRouter.get('/admin/logout',auth,userLogout)
+userRouter.post('/admin/logout',auth,userLogout)
 
 
 export default userRouter;

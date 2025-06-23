@@ -466,7 +466,7 @@ const OrderDetail = () => {
                   <MapPin size={16} className="mr-2 text-gray-500 dark:text-gray-300" />
                   Shipping Address
                 </h4>
-                <div className="mt-2 rounded-md bg-gray-50 p-3 text-sm text-gray-600 dark:border-gray-700 bg-white dark:bg-[#0d1117]">
+                <div className="mt-2 rounded-md  p-3 text-sm text-gray-600 dark:border-gray-700 bg-white dark:bg-[#0d1117]">
                   {order.shippingAddress ? (
                     <>
                       <p>
