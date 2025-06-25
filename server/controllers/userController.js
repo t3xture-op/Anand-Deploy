@@ -61,13 +61,11 @@ export async function userLogin(req, res) {
       last_login_date: new Date(),
     });
 
-    const isProd = process.env.NODE_ENV === "production";
-
     const cookiesOption = {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? "none" : "lax",
-      ...(isProd && { domain: ".vercel.app" }), // only in prod
+      secure: true,
+      sameSite: none,
+      domain: ".vercel.app",
     };
 
     const prefix = user.role === "admin" ? "admin" : "user";
@@ -103,14 +101,13 @@ export async function userLogout(req, res) {
 
     const user = await User.findById(userId).select("role");
 
-    const isProd = process.env.NODE_ENV === "production";
-
     const cookiesOption = {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? "none" : "lax",
-      ...(isProd && { domain: ".vercel.app" }), // only in prod
+      secure: true,
+      sameSite: none,
+      domain: ".vercel.app",
     };
+
     const prefix = user?.role === "admin" ? "admin" : "user";
 
     res.clearCookie(`${prefix}AccessToken`, cookiesOption);
