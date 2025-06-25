@@ -65,7 +65,7 @@ export async function userLogin(req, res) {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: ".vercel.app",
+      domain: "anand-deploy.vercel.app",
     };
 
     const prefix = user.role === "admin" ? "admin" : "user";
@@ -105,7 +105,7 @@ export async function userLogout(req, res) {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: ".vercel.app",
+      domain: "anand-deploy.vercel.app",
     };
 
     const prefix = user?.role === "admin" ? "admin" : "user";
@@ -123,6 +123,101 @@ export async function userLogout(req, res) {
     });
   }
 }
+
+
+
+
+//login admin
+export async function adminLogin(req, res) {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    if (user.status !== "Active") {
+      return res.status(400).json({ message: "Contact Admin" });
+    }
+
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const accessToken = await generatedAccessToken(user._id);
+    const refreshToken = await generatedRefreshToken(user._id);
+
+    await User.findByIdAndUpdate(user._id, {
+      last_login_date: new Date(),
+    });
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      domain: "anand-admin.vercel.app",
+    };
+
+    const prefix = user.role === "admin" ? "admin" : "user";
+
+    res.cookie(`${prefix}AccessToken`, accessToken, cookiesOption);
+    res.cookie(`${prefix}RefreshToken`, refreshToken, cookiesOption);
+
+    return res.json({
+      message: "Login successful",
+      data: {
+        accessToken,
+        refreshToken,
+        user: {
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          image: user.image,
+        },
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error logging in",
+      error: error.message,
+    });
+  }
+}
+
+//logout admin
+export async function adminLogout(req, res) {
+  try {
+    const userId = req.user._id;
+
+    const user = await User.findById(userId).select("role");
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      domain: "anand-admin.vercel.app",
+    };
+
+    const prefix = user?.role === "admin" ? "admin" : "user";
+
+    res.clearCookie(`${prefix}AccessToken`, cookiesOption);
+    res.clearCookie(`${prefix}RefreshToken`, cookiesOption);
+
+    // Remove stored refresh token in DB
+    await User.findByIdAndUpdate(userId, { refresh_token: "" });
+
+    return res.json({ message: "Logout successful" });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+
+
 
 //get current user
 export const getCurrentUser = async (req, res) => {
