@@ -29,7 +29,7 @@ export default function ProductDetail() {
 
   const handleAddToCart = async () => {
     if (!isLoggedIn) {
-      toast.success('Please login to add items to cart.');
+      toast.warning('Please login to add items to cart.');
       return;
     }
 
