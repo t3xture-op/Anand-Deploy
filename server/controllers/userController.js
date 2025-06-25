@@ -64,7 +64,7 @@ export async function userLogin(req, res) {
     const cookiesOption = {
       httpOnly: true,
       secure: true,
-      sameSite: none,
+      sameSite: "none",
       domain: ".vercel.app",
     };
 
@@ -104,7 +104,7 @@ export async function userLogout(req, res) {
     const cookiesOption = {
       httpOnly: true,
       secure: true,
-      sameSite: none,
+      sameSite: "none",
       domain: ".vercel.app",
     };
 
